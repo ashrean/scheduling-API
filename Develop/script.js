@@ -21,27 +21,43 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 
   //displays the current day //
-  var now = dayjs().format('MM/DD/YYYY')
+  var now = dayjs().format('MM/DD/YYYY, h:mm:ss a')
   $('#currentDay').text(now)
 
-  // created a variable selecting the id and splitting it so we can isolate the number // 
+  // created a variable selecting the id and splitting it so we can isolate the number //
   var hour = $('#hour-9').attr('id').split('-')[1]
   var currentHour = dayjs().hour()
 
   var txtHour = $('#hour-9')
 
-  if (hour < currentHour) {
-    txtHour.addClass('past')
-    txtHour.removeClass('present future')
 
-  } else if (hour === currentHour) {
-    txtHour.removeClass('past future')
-    txtHour.addClass('present')
 
-  } else {
-    txtHour.addClass('future')
-    txtHour.removeClass('past present')
+
+  function nexthour(){
+    var hourNow = moment().hours();
+
+    // looping over the time blocks
+    $(".timeblock").each(function(){
+      var hourBlock = parseInt($(this).attr("id").split("-")[1]);
+
+      // The if/else statement states that we are adding the class to the variable while
+     // removing the other classes
+      if (hour < currentHour) {
+      txtHour.addClass('past')
+      txtHour.removeClass('present future')
+
+     } else if (hour === currentHour) {
+       txtHour.removeClass('past future')
+       txtHour.addClass('present')
+
+     } else {
+      txtHour.addClass('future')
+      txtHour.removeClass('past present')
+    }
+
+
+  })
+
   }
-
-
-});
+  }
+);
