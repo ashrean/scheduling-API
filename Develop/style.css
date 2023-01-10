@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
 
@@ -36,7 +36,7 @@ textarea {
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #a2b3eb;
   color: white;
 }
 

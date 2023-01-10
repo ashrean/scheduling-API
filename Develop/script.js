@@ -1,7 +1,8 @@
-// Creating Date, time using moment()
-var m = moment();
+
 // date will be displayed in the ex: January 10, 2023 11:59pm
-$("#currentDay").text(moment().format("LLLL"))
+var now = dayjs().format(' dddd MM/DD/YYYY h:mm a')
+$('#currentDay').text(now)
+
 
 $(document).ready(function(){
   colorBlock();
@@ -30,6 +31,7 @@ function colorBlock(){
       $(this).removeClass("future past");
       $(this).addClass("present");
     }
+    colorBlock();
   });
 }
 
@@ -50,7 +52,7 @@ $(".saveBtn").click(function(){
   renderText();
 });
 
-$(".deleteBtn").click(function(){
+ $(".deleteBtn").click(function(){
   eventText = $(this).siblings(".input").val("");
   eventText = $(this).siblings(".input").val();
   eventTime = $(this).siblings(".hour").text();
@@ -79,31 +81,31 @@ function renderText(){
   $("#12").val(savedEvent12);
 
   var savedEvent1 = JSON.parse(localStorage.getItem("1:00 pm"));
-  $("#1").val("");
-  $("#1").val(savedEvent1);
+  $("#13").val("");
+  $("#13").val(savedEvent1);
 
   var savedEvent2 = JSON.parse(localStorage.getItem("2:00 pm"));
-  $("12").val("");
-  $("#2").val(savedEvent2);
+  $("14").val("");
+  $("#14").val(savedEvent2);
 
   var savedEvent3 = JSON.parse(localStorage.getItem("3 pm"));
-  $("#3").val("");
-  $("#3").val(savedEvent3);
+  $("#15").val("");
+  $("#15").val(savedEvent3);
 
   var savedEvent4 = JSON.parse(localStorage.getItem("4:00 pm"));
-  $("4").val("");
-  $("4").val(savedEvent4);
+  $("#16").val("");
+  $("#16").val(savedEvent4);
 
   var savedEvent5 = JSON.parse(localStorage.getItem("5 pm"));
-  $("#5").val("");
-  $("#5").val(savedEvent5);
+  $("#17").val("");
+  $("#17").val(savedEvent5);
 
   var savedEvent6 = JSON.parse(localStorage.getItem("6 pm"));
-  $("#6").val("");
-  $("#6").val(savedEvent6);
+  $("#18").val("");
+  $("#18").val(savedEvent6);
 
   var savedEvent7 = JSON.parse(localStorage.getItem("7 pm"));
-  $("#7").val("");
-  $("#7").val(savedEvent17);
+  $("#19").val("");
+  $("#19").val(savedEvent17);
 
 };
