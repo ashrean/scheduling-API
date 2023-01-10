@@ -5,13 +5,12 @@
  - Installation Instructions
  - GitHub Account
  - Contacts
- - Images
  - Code Snippets
  - Resources
  - Credits
 
 # Description
-This project was to create a scheduler to help with your day to day activites. By breaking it down hour by hour we created a color code to help make it more readable, grey for hours that have passed, blue for the present hour and green for the upcoming hours. We attached a saved button to save all of your events.
+This project was to create a daily schedule to help keep track of your day-to-day activities. To keep this app more organized we broke it down by hour and added color blocks to visualize your day.  For reference grey means the hour has passed, blue for the current hour, and green for the upcoming hours.
 
 # Installtion Instructions
 1. Open the terminal (make sure it's not coded into a directory)
@@ -34,29 +33,24 @@ Email -> sese.ashrean@gmail.com
 
 Linkedin -> https://www.linkedin.com/in/ashleyrean/
 
-# Images
-
 
 # Code Snippets
- $(".input").each(function(){
-    var scheduledTime = parseInt($(this).attr("id"));
-    console.log(scheduledTime);
+$(".time-div").each(function(){
+  var timeDiv = $(this).attr("id").split("-")[1];
 
-    if (currentTime > scheduledTime) {
-      $(this).removeClass("present future");
-      $(this).addClass("past");
+  if (hourNow == timeDiv) {
+    $(this).addClass("present");
+    $(this).children(".description").addClass("present");
 
-    } else if (currentTime < scheduledTime) {
-      $(this).removeClass("present past");
-      $(this).addClass("future");
+  } else if (hourNow < timeDiv) {
+    $(this).removeClass("present");
+    $(this).addClass("future");
 
-    } else {
-      $(this).removeClass("future past");
-      $(this).addClass("present");
-    }
-    colorBlock();
-  });
-}
+  } else if (hourNow > timeDiv) {
+    $(this).removeClass("future")
+    $(this).addClass("past");
+  }
+});
 
 
 # Resources
@@ -65,5 +59,5 @@ Linkedin -> https://www.linkedin.com/in/ashleyrean/
 - Book: Javascipt 6th edition by Mike McGrath
 
 # Credits
-Alexis S. - My tutor for the week, huge help on pseduocoding, and going over topics
-Paul - My brother-in-law
+- Alexis S. - My tutor for the week, huge help on pseduocoding, and going over topics
+- Paul - My brother-in-law
