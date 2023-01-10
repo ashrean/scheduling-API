@@ -1,63 +1,109 @@
+// Creating Date, time using moment()
+var m = moment();
+// date will be displayed in the ex: January 10, 2023 11:59pm
+$("#currentDay").text(moment().format("LLLL"))
 
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
+$(document).ready(function(){
+  colorBlock();
+  renderText();
+});
 
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+function colorBlock(){
+  var currentTime = moment().hours();
+  console.log("Current Time" + currentTime);
 
-  //displays the current day //
-  var now = dayjs().format('MM/DD/YYYY, h:mm:ss a')
-  $('#currentDay').text(now)
+  // comparing the current time to the time block and checking
+  // if its in the past, present, future
+  $(".input").each(function(){
+    var scheduledTime = parseInt($(this).attr("id"));
+    console.log(scheduledTime);
 
-  // created a variable selecting the id and splitting it so we can isolate the number //
-  var hour = $('#hour-9').attr('id').split('-')[1]
-  var currentHour = dayjs().hour()
+    if (currentTime > scheduledTime) {
+      $(this).removeClass("present future");
+      $(this).addClass("past");
 
-  var txtHour = $('#hour-9')
+    } else if (currentTime < scheduledTime) {
+      $(this).removeClass("present past");
+      $(this).addClass("future");
 
-
-
-
-  function nexthour(){
-    var hourNow = moment().hours();
-
-    // looping over the time blocks
-    $(".timeblock").each(function(){
-      var hourBlock = parseInt($(this).attr("id").split("-")[1]);
-
-      // The if/else statement states that we are adding the class to the variable while
-     // removing the other classes
-      if (hour < currentHour) {
-      txtHour.addClass('past')
-      txtHour.removeClass('present future')
-
-     } else if (hour === currentHour) {
-       txtHour.removeClass('past future')
-       txtHour.addClass('present')
-
-     } else {
-      txtHour.addClass('future')
-      txtHour.removeClass('past present')
+    } else {
+      $(this).removeClass("future past");
+      $(this).addClass("present");
     }
+  });
+}
+
+// Functionality of the button
+var eventTime;
+var eventText;
 
 
-  })
+$(".saveBtn").click(function(){
+  eventText = $(this).siblings(".input").val();
+  console.log(eventText);
 
-  }
-  }
-);
+  eventTime = $(this).siblings(".hour").text();
+  console.log(eventTime);
+  localStorage.setItem(eventTime, JSON.stringify(eventText));
+
+  colorBlock();
+  renderText();
+});
+
+$(".deleteBtn").click(function(){
+  eventText = $(this).siblings(".input").val("");
+  eventText = $(this).siblings(".input").val();
+  eventTime = $(this).siblings(".hour").text();
+  localStorage.setItem(eventTime, JSON.stringify(eventText));
+
+  colorBlock();
+  renderText();
+});
+
+// Diplay and entering events for each hour
+function renderText(){
+  var savedEvent9 = JSON.parse(localStorage.getItem("9:00 am"));
+  $("#9").val("");
+  $("#9").val(savedEvent9);
+
+  var savedEvent10 = JSON.parse(localStorage.getItem("10:00 am"));
+  $("#10").val("");
+  $("#10").val(savedEvent10);
+
+  var savedEvent11 = JSON.parse(localStorage.getItem("11:00 am"));
+  $("#11").val("");
+  $("#11").val(savedEvent11);
+
+  var savedEvent12 = JSON.parse(localStorage.getItem("12:00 pm"));
+  $("#12").val("");
+  $("#12").val(savedEvent12);
+
+  var savedEvent1 = JSON.parse(localStorage.getItem("1:00 pm"));
+  $("#1").val("");
+  $("#1").val(savedEvent1);
+
+  var savedEvent2 = JSON.parse(localStorage.getItem("2:00 pm"));
+  $("12").val("");
+  $("#2").val(savedEvent2);
+
+  var savedEvent3 = JSON.parse(localStorage.getItem("3 pm"));
+  $("#3").val("");
+  $("#3").val(savedEvent3);
+
+  var savedEvent4 = JSON.parse(localStorage.getItem("4:00 pm"));
+  $("4").val("");
+  $("4").val(savedEvent4);
+
+  var savedEvent5 = JSON.parse(localStorage.getItem("5 pm"));
+  $("#5").val("");
+  $("#5").val(savedEvent5);
+
+  var savedEvent6 = JSON.parse(localStorage.getItem("6 pm"));
+  $("#6").val("");
+  $("#6").val(savedEvent6);
+
+  var savedEvent7 = JSON.parse(localStorage.getItem("7 pm"));
+  $("#7").val("");
+  $("#7").val(savedEvent17);
+
+};
